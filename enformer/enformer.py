@@ -43,7 +43,7 @@ class Enformer(snt.Module):
   """Main model."""
 
   def __init__(self,
-               channels: int = 1536,
+               channels: int = 3072,
                num_transformer_layers: int = 11,
                num_heads: int = 8,
                pooling_type: str = 'attention',
@@ -61,7 +61,7 @@ class Enformer(snt.Module):
     super().__init__(name=name)
     # pylint: disable=g-complex-comprehension,g-long-lambda,cell-var-from-loop
     heads_channels = {'human': 5313, 'mouse': 1643}
-    dropout_rate = 0.4
+    dropout_rate = 0.6
     assert channels % num_heads == 0, ('channels needs to be divisible '
                                        f'by {num_heads}')
     whole_attention_kwargs = {
@@ -238,7 +238,7 @@ class SoftmaxPooling1D(snt.Module):
   """Pooling operation with optional weights."""
 
   def __init__(self,
-               pool_size: int = 2,
+               pool_size: int = 4,
                per_channel: bool = False,
                w_init_scale: float = 0.0,
                name: str = 'softmax_pooling'):
